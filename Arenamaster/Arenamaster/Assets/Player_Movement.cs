@@ -56,7 +56,7 @@ public class Player_Movement : MonoBehaviour {
 		adjusted_speed = base_speed - penalty; 
 		//Debug.Log (speedBase); //prints what's in parentheses out to the console
 
-		if (Input.GetKey (KeyCode.LeftShift)) {
+		if ( (Input.GetKey (KeyCode.LeftShift)) && !(controller.velocity.magnitude==0)  ) {
 			if (current > staminaThreshhold){
 				/* While leftshift is held down and if the player still has stamina left,
 				 * player speed is doubled and stamina decreases.*/
@@ -77,6 +77,8 @@ public class Player_Movement : MonoBehaviour {
 			current+=recovery;
 			Stamina_Slider.value = current;
 		}
+
+
 		if (controller.isGrounded) {
 			//Feed moveDirection with input.
 			moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
