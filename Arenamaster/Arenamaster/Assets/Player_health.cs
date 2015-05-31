@@ -7,7 +7,7 @@ public class Player_health : MonoBehaviour {
 	public Slider Health_Slider;
 
 	public float cap;		/* health cap */
-	public static float current;	/* current health */
+	public  float current;	/* current health */
 	public float playerWoundedAmount;		/* how many hp they are lacking */
 	public static float damageTaken;
 
@@ -36,9 +36,5 @@ public class Player_health : MonoBehaviour {
 
 		playerWoundedAmount = cap - current;
 		lowHealthSpeedPenalty = playerWoundedAmount / lowHealthSpeedSlowdownAmount;
-
-		if (Input.GetKeyDown (KeyCode.H)) {
-			current = current - 10;
-		}
 	}
 }

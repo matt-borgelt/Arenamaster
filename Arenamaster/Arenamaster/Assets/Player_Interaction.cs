@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class Player_Interaction : MonoBehaviour {
 
+	public Player_health playerHealth;
 
 	public Vector3 mouseTarget;
 	public Camera cameraObject;
@@ -85,6 +86,10 @@ public class Player_Interaction : MonoBehaviour {
 		if(GUI.Button (new Rect (10, 40+1, 100, 20), "Attack")){
 			if(selected.gameObject.name=="Tim tom"){
 				console.text="You attack the NPC.";
+			}
+			if(selected.gameObject.name=="Player"){
+				console.text="You hit yourself.";
+				playerHealth.current = playerHealth.current - 10;
 			}
 		}
 		GUI.DragWindow(new Rect(0, 0, 10000, 10000));

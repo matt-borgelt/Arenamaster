@@ -1,10 +1,10 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Player_Interaction.cs">
     <Files>
-      <File FileName="Assets\Player_Interaction.cs" Line="79" Column="5" />
-      <File FileName="Assets\Player_Movement.cs" Line="1" Column="1" />
-      <File FileName="Assets\Player_health.cs" Line="1" Column="1" />
+      <File FileName="Assets\Player_Interaction.cs" Line="73" Column="4" />
+      <File FileName="Assets\Player_Movement.cs" Line="9" Column="2" />
+      <File FileName="Assets\Player_health.cs" Line="28" Column="3" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
