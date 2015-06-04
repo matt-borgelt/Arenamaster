@@ -1,22 +1,21 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
-public class npc_health : npc_super {
+public class testitemscript : MonoBehaviour {
 
-	public float cap;		/* health cap */
-	public  float current;
-
+	public string name;
 	public string examine;
+	public float weight;
+	public bool onGround;
 
 	// Use this for initialization
 	void Start () {
-		cap = 100;
-		current = 100;
-		//id = 10.0F;
+	
 	}
 	
 	// Update is called once per frame
 	void Update () {
-
+	
 	}
 }
