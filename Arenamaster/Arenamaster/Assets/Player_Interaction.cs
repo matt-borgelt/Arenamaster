@@ -2,13 +2,11 @@
 using System.Collections;
 using UnityEngine.UI;
 
-//meaningless change
-
 public class Player_Interaction : MonoBehaviour {
 
 	public Player_health playerHealth;
 	public npc_health npcHealth;
-	public testitemscript item;
+	public item item;
 	public player_physical_inv inventory;
 
 	public Vector3 mouseTarget;
@@ -57,7 +55,7 @@ public class Player_Interaction : MonoBehaviour {
 
 			parent = selected.transform.parent.name.ToString();
 			if(parent=="npc"){ npcHealth = selected.GetComponent<npc_health>(); }
-			if(parent=="item"){ item = selected.GetComponent<testitemscript>(); }
+			if(parent=="item"){ item = selected.GetComponent<item>(); }
 
 			position = Input.mousePosition;
 			menu=true;
@@ -100,6 +98,7 @@ public class Player_Interaction : MonoBehaviour {
 		}
 		if (GUI.Button (new Rect (10, 40+1, 100, 20), "Pick-up")) {
 			inventory.items.Add(item);
+			item.inventory_spot=0;
 			item.onGround=false;
 		}
 	}
@@ -127,14 +126,23 @@ public class Player_Interaction : MonoBehaviour {
 	}
 
 	void PhysicalInventoryPlayer(int windowId){
-		/*GUI.Button (new Rect (10, 20, 20, 20), "");  GUI.Button (new Rect (30+1, 20, 20, 20), "");
-		GUI.Button (new Rect (10, 40+1, 20, 20), "");						GUI.Button (new Rect (30+1, 40+1, 20, 20), "");
-		GUI.Button (new Rect (10, 60+1, 20, 20), "");						GUI.Button (new Rect (30+1, 60+1, 20, 20), "");
-		GUI.Button (new Rect (10, 80+1, 20, 20), "");						GUI.Button (new Rect (30+1, 80+1, 20, 20), "");
-		GUI.Button (new Rect (10, 100+1, 20, 20), "");						GUI.Button (new Rect (30+1, 100+1, 20, 20), "");*/
-		foreach(testitemscript item in inventory.items){
-			GUI.Button(new Rect(10, 20, 20, 20), item.name);
-		}
+		float x = 10.0F;
+		float y = 20.0F;
+		float offset = 5.0F;
+		float tileSize = 25.0F;
+
+		// 1st column
+		GUI.Button (new Rect (x, y+offset, tileSize, tileSize), ((inventory.items.Find((item obj) => (obj.inventory_spot==0))).name_string)     );
+		GUI.Button (new Rect (x, y+(1*tileSize)+offset, tileSize, tileSize), "B");
+		GUI.Button (new Rect (x, y+(2*tileSize)+offset, tileSize, tileSize), "C");
+		GUI.Button (new Rect (x, y+(3*tileSize)+offset, tileSize, tileSize), "D");
+
+		//2nd column
+		GUI.Button (new Rect (x+(1*tileSize+offset), y+offset, tileSize, tileSize), "A");
+		GUI.Button (new Rect (x+(1*tileSize+offset), y+(1*tileSize)+offset, tileSize, tileSize), "B");
+		GUI.Button (new Rect (x+(1*tileSize+offset), y+(2*tileSize)+offset, tileSize, tileSize), "C");
+		GUI.Button (new Rect (x+(1*tileSize+offset), y+(3*tileSize)+offset, tileSize, tileSize), "D");
+	
 
 	}
 
@@ -144,12 +152,16 @@ public class Player_Interaction : MonoBehaviour {
 		}
 
 		if(GUI.Button (new Rect (10, 40+1, 100, 20), "Attack")){
-			console.text="You attack : " + selected.gameObject.name;; 
+			console.text="You attack : " + selected.gameObject.name; 
 			npcHealth.current = npcHealth.current - 10;
 		}
 
 		if (GUI.Button (new Rect (10, 60+1, 100, 20), "Check-health")) {
-			console.text=selected.gameObject.name + "'s hp is : " + npcHealth.current.ToString();
+			console.text=selected.gameObject.name + "'s `hp is : " + npcHealth.current.ToString();
+		}
+
+		if (GUI.Button (new Rect (10, 80+1, 100, 20), "Talk-to")) {
+			console.text="npc dialog here...";
 		}
 	}
 }
