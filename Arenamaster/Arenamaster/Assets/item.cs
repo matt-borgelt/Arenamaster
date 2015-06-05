@@ -14,8 +14,11 @@ public class item : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		//onGround = true;
+		//name_string = "";
 		rend = GetComponent<Renderer> ();
 		rend.enabled = true;
+		inventory_spot = 0;
+		//name_string = "X";
 	}
 	
 	// Update is called once per frame
