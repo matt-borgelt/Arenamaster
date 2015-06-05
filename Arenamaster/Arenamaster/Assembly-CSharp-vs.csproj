@@ -55,6 +55,7 @@
      <Compile Include="Assets\player_equipped.cs" />
      <Compile Include="Assets\player_physical_inv.cs" />
      <Compile Include="Assets\player_stats.cs" />
+     <None Include="Assets\npcdialog.xml" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
