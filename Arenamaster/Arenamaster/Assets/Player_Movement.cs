@@ -5,8 +5,8 @@ using UnityEngine.UI;
 public class Player_Movement : MonoBehaviour {
 	
 	public Player_health playerHealth;
+	public player_stats stats;
 	public Slider Stamina_Slider;
-
 
 	public float current_speed;		/* The speed the player is moving at in this frame. */
 	public float base_speed;			/* base movment speed */
