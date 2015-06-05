@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<npcs>
+	<npc Name="Tim tom" npcType="Bum" entries="1">
+		<speech1>Speech bubble 1</speech1>
+	</npc>
+</npcs>

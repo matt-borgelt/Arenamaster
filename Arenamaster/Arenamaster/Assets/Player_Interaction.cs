@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using System.Xml;
+using System.IO;
+
 
 public class Player_Interaction : MonoBehaviour {
 
@@ -23,9 +26,13 @@ public class Player_Interaction : MonoBehaviour {
 	Vector3 position;
 	public Rect windowContextMenu;
 	public Rect windowPhysicalInventory;
+	public Rect windowDialog;
+	public string dialog;
+
 	public bool OnPlayerPhysicalInventory;
-	public bool inventorySlotSelect;
+	//public bool inventorySlotSelect;
 	//public GUISkin mySkin;
+	public bool OnDialogLaunch;
 
 	public RaycastHit hit;
 
@@ -37,8 +44,20 @@ public class Player_Interaction : MonoBehaviour {
 	void Start () {
 		menu = false;
 		OnPlayerPhysicalInventory = false;
-		inventorySlotSelect = false;
+		//inventorySlotSelect = false;
 		selected = new GameObject();
+		OnDialogLaunch = false;
+
+		XmlReader reader = XmlReader.Create ("assets/npcdialog.xml");
+		while (reader.Read()) {
+			if(reader.IsStartElement("npc")){
+				reader.Read();
+				if(reader.IsStartElement("speech1")){
+					dialog=reader.ReadString();
+				}
+
+			}
+		}
 	}
 
 	void Update () {
@@ -65,6 +84,7 @@ public class Player_Interaction : MonoBehaviour {
 		if (Input.GetMouseButtonUp (1)) {
 			menu=false;
 			OnPlayerPhysicalInventory=false;
+			OnDialogLaunch=false;
 			selected = null;
 		}
 	}
@@ -90,6 +110,11 @@ public class Player_Interaction : MonoBehaviour {
 		}
 		if (OnPlayerPhysicalInventory) {
 			windowPhysicalInventory = GUI.Window(0, new Rect( (position.x)+200,Screen.height-position.y, 200, 150), PhysicalInventoryPlayer, "On your person" );
+		}
+		if (OnDialogLaunch) {
+			//launch dialog
+			windowDialog = GUI.Window(0, new Rect( (position.x)+200,Screen.height-position.y, 200, 150), DialogNPC, dialog );
+
 		}
 	}
 	
@@ -163,7 +188,14 @@ public class Player_Interaction : MonoBehaviour {
 		}
 
 		if (GUI.Button (new Rect (10, 80+1, 100, 20), "Talk-to")) {
-			console.text="npc dialog here...";
+			//console.text="npc dialog here...";
+			OnDialogLaunch=true;
 		}
 	}
+
+	void DialogNPC(int windowId){
+		
+
+	}
+
 }
