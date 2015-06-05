@@ -24,6 +24,7 @@ public class Player_Interaction : MonoBehaviour {
 	public Rect windowContextMenu;
 	public Rect windowPhysicalInventory;
 	public bool OnPlayerPhysicalInventory;
+	public bool inventorySlotSelect;
 	//public GUISkin mySkin;
 
 	public RaycastHit hit;
@@ -36,6 +37,7 @@ public class Player_Interaction : MonoBehaviour {
 	void Start () {
 		menu = false;
 		OnPlayerPhysicalInventory = false;
+		inventorySlotSelect = false;
 		selected = new GameObject();
 	}
 
@@ -88,9 +90,9 @@ public class Player_Interaction : MonoBehaviour {
 		}
 		if (OnPlayerPhysicalInventory) {
 			windowPhysicalInventory = GUI.Window(0, new Rect( (position.x)+200,Screen.height-position.y, 200, 150), PhysicalInventoryPlayer, "On your person" );
-
 		}
 	}
+	
 
 	void ContextMenuItem(int windowId){
 		if (GUI.Button (new Rect (10, 20, 100, 20), "Examine")) {
@@ -132,7 +134,7 @@ public class Player_Interaction : MonoBehaviour {
 		float tileSize = 25.0F; //dimension of square tile
 
 		// 1st column
-		GUI.Button (new Rect (x, y+offset, tileSize, tileSize), (inventory.items.Find((item obj) => (obj.inventory_spot==0))) ? (inventory.items.Find((item obj) => (obj.inventory_spot==0))).name : " "  );
+		GUI.Button (new Rect (x, y + offset, tileSize, tileSize), (inventory.items.Find ((item obj) => (obj.inventory_spot == 0))) ? (inventory.items.Find ((item obj) => (obj.inventory_spot == 0))).name : " ");
 		GUI.Button (new Rect (x, y+(1*tileSize)+offset, tileSize, tileSize), (inventory.items.Find((item obj) => (obj.inventory_spot==1))) ? (inventory.items.Find((item obj) => (obj.inventory_spot==1))).name : " "  );
 		GUI.Button (new Rect (x, y+(2*tileSize)+offset, tileSize, tileSize), (inventory.items.Find((item obj) => (obj.inventory_spot==2))) ? (inventory.items.Find((item obj) => (obj.inventory_spot==2))).name : " "  );
 		GUI.Button (new Rect (x, y+(3*tileSize)+offset, tileSize, tileSize), (inventory.items.Find((item obj) => (obj.inventory_spot==3))) ? (inventory.items.Find((item obj) => (obj.inventory_spot==3))).name : " "  );
