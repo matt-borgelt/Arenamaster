@@ -52,7 +52,9 @@
      <Compile Include="Assets\item.cs" />
      <Compile Include="Assets\npc_health.cs" />
      <Compile Include="Assets\npc_super.cs" />
+     <Compile Include="Assets\player_equipped.cs" />
      <Compile Include="Assets\player_physical_inv.cs" />
+     <Compile Include="Assets\player_stats.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
