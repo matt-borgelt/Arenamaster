@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <npcs>
-	<npc Name="Tim tom" npcType="Bum" entries="1">
-		<speech1>Speech bubble 1</speech1>
+	<npc name="Tim tom" npcType="Bum" lines="2" resps="2">
+		<line>Do you eat pork?</line>
+		<line>We have nothing further to discuss.</line>
+		<resp>Yes?</resp>
+		<resp>I see</resp>
+	</npc>
+	<npc name="Donny" npcType="Bum" lines="2" resps="1">
+		<line>Please ignore my friend, Tim-tom.</line>
+		<line>He's retarded.</line>
+		<resp>Why?</resp>
 	</npc>
 </npcs>
