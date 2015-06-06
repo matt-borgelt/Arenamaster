@@ -213,3 +213,18 @@ pip-log.txt
 
 #Mr Developer
 .mr.developer.cfg
+
+/Arenamaster/Arenamaster/Temp/*
+Obj/
+UnityGenerated/
+/Arenamaster/Arenamaster/Library/*
+
+*.svd
+*.userprefs
+*.csproj
+*.pidb
+*.suo
+*.sln
+*.user
+*.unityproj
+*.booproj
