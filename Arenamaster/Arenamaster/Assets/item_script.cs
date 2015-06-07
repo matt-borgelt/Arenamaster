@@ -19,17 +19,12 @@ public class item_script : MonoBehaviour {
 
 	public bool isWearable;
 
-	// Use this for initialization
-	void Start () {
-		//onGround = true;
-		//name_string = "";
-		//rend = GetComponent<Renderer> ();
-		//rend.enabled = true;
 
-		//name_string = "X";
+	void Start () {
+
 	}
 	
-	// Update is called once per frame
+
 	void Update () {
 		//if (onGround == false) {
 			//rend.enabled=false;

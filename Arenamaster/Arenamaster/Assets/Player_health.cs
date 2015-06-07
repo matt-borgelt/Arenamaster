@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class Player_health : MonoBehaviour {
 
-	public Slider Health_Slider;
+	//public Slider Health_Slider;
 
 	public float cap;		/* health cap */
 	public  float current;	/* current health */
@@ -26,13 +26,13 @@ public class Player_health : MonoBehaviour {
 		/* attackEffectiveness = npc (or non-npc) attack lvl in whatever they're using + 
 		 * weapon strength. Both these variables could be imported from another class */
 
-		Health_Slider.maxValue = cap;
-		Health_Slider.value = current;
+		//Health_Slider.maxValue = cap;
+		//Health_Slider.value = current;
 	}
 
 	void Update () {
-		Health_Slider.maxValue = cap;
-		Health_Slider.value = current;
+		//Health_Slider.maxValue = cap;
+		//Health_Slider.value = current;
 
 		playerWoundedAmount = cap - current;
 		lowHealthSpeedPenalty = playerWoundedAmount / lowHealthSpeedSlowdownAmount;

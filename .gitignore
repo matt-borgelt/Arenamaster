@@ -214,10 +214,10 @@ pip-log.txt
 #Mr Developer
 .mr.developer.cfg
 
-/Arenamaster/Arenamaster/Temp/*
+Arenamaster/Arenamaster/Temp/*
 Obj/
 UnityGenerated/
-/Arenamaster/Arenamaster/Library/*
+Arenamaster/Arenamaster/Library/*
 
 *.svd
 *.userprefs

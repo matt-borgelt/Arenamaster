@@ -5,85 +5,103 @@ using UnityEngine.UI;
 public class Player_Movement : MonoBehaviour {
 	
 	public Player_health playerHealth;
-	public player_stats stats;
-	public Slider Stamina_Slider;
-
-	public float current_speed;		/* The speed the player is moving at in this frame. */
-	public float base_speed;			/* base movment speed */
-	public float adjusted_speed;      /* base movment speed with all other variables factored in */
-	public float penalty;
+	//public player_stats stats;
+	public Slider slider;
+	public Text console;
 
 	public float jump_speed; 
 	public float gravity;
 	private Vector3 moveDirection;
 
+	public bool walking, running;
+
+	public float walkingSpeed;
+	public float runningSpeed;
+	public float sprintingSpeed;
+
+	public float modeOfMovement;
+
+	//public float base_speed;			/* base movment speed */
+	public float adjusted_speed;      /* base movment speed with all other variables factored in */
+	public float penalty;
+
+
+
 	public float cap;
-	public float current; 			/* the current stamina value  */
+	public float energyCurrent; 			/* the current stamina value  */
 	public float drainRate;	/* the rate at which stamina is drained while sprinting */
 	public float sprintMultiplier;	/* the factor by which speed is multiplied during sprint. */
 	public float recovery; 	/* stamina points recovered during rest frame. */
-	public float staminaThreshhold; /* can't run below this value */
+	public float cannotRunBelowThis; /* can't run below this value */
+
+	void Awake(){
+		walking = true;
+		running = false;
+		energyCurrent = cap;
+	}
 
 	void Start(){
-		base_speed = 5.0F; //your normal base speed
-		current_speed = base_speed; //the current speed starts out as the player's normal base speed
-		drainRate = 1.0F; 
-		sprintMultiplier = 2.0F; 
-		recovery = 1.0F; 
-		staminaThreshhold = 1.0F; 
-
 		jump_speed = 8.0F;
 		gravity = 20.0F;
 		moveDirection = Vector3.zero;
 
-		cap = 120F; //how much total stamina you have
-		current = cap;
+		walkingSpeed = 2.0F;
+		runningSpeed = 7.0F;
+		
+		cap = 100.0F;
+		
+		modeOfMovement = walkingSpeed;
+		
 
-		Stamina_Slider.maxValue = cap;
-		Stamina_Slider.value = current;
-
-		penalty = playerHealth.lowHealthSpeedPenalty;
-		adjusted_speed = base_speed - penalty; 
-		//Debug.Log (speedBase);
-
+		
+		cannotRunBelowThis = 1.0F;
+		
+		slider.maxValue = cap;
+		slider.minValue = 0;
+		slider.value = energyCurrent;
 	}
 
 	
 	void Update() {
 		CharacterController controller = GetComponent<CharacterController>();
 
-		penalty = playerHealth.lowHealthSpeedPenalty;
-		adjusted_speed = base_speed - penalty; 
-		//Debug.Log (speedBase); //prints what's in parentheses out to the console
 
-		if ( (Input.GetKey (KeyCode.LeftShift)) && !(controller.velocity.magnitude==0)  ) {
-			if (current > staminaThreshhold){
-				/* While leftshift is held down and if the player still has stamina left,
-				 * player speed is doubled and stamina decreases.*/
-				current_speed = adjusted_speed * sprintMultiplier;  //=speedbase * staminamultiplier
-				current-=drainRate;
-				Stamina_Slider.value = current;
+		if (energyCurrent < cap) {
+			energyCurrent += 1.0F;
+			//slider.value += 1.0F;
+		}
+
+		if ((Input.GetKey (KeyCode.LeftShift))) {
+			if (energyCurrent > cannotRunBelowThis) {
+				modeOfMovement = runningSpeed;
+				energyCurrent -= 1.0F;
+				slider.value -= 1.0F;
+			}else{
+				modeOfMovement = walkingSpeed;
+			
 			}
-			else{ /* if stamina is 0 speed is returned to normal. */
-				current_speed = adjusted_speed; //=speedbase;
-			}
+		} 
+		if  ((Input.GetKeyUp(KeyCode.LeftShift))){
+			modeOfMovement = walkingSpeed;
+	
+
 		}
-		if (Input.GetKeyUp (KeyCode.LeftShift)) {
-			current_speed = adjusted_speed;
-		}
-		if( !(Input.GetKey (KeyCode.LeftShift)) && (current < cap) ) {
-			/* The stamina recharges while leftshift is not held down, 
-			 * but it doesn't recharge beyond the player's max stamina capacity. */
-			current+=recovery;
-			Stamina_Slider.value = current;
-		}
+
+		console.text = energyCurrent.ToString();
+
+
+
+
+
+		//slider.value = energyCurrent;
+
 
 
 		if (controller.isGrounded) {
 			//Feed moveDirection with input.
 			moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
 			moveDirection = transform.TransformDirection(moveDirection);
-			moveDirection *= current_speed;
+			moveDirection *= modeOfMovement;
 
 			if (Input.GetButton("Jump")){
 				moveDirection.y = jump_speed;
